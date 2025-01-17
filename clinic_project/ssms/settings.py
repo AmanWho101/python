@@ -37,6 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ssms_model', # for model use
+    'clerk', # clerk / receptionist
+    'head_office', # head office
+    'laboratory', # laboratory
+    'opd', # opd
+    'pharmacy', # pharmacy
+    'store', # store
+    'auth_', # authentication
+    
 ]
 
 MIDDLEWARE = [
@@ -48,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+SESSION_COOKIE_AGE = 5*60
 ROOT_URLCONF = 'ssms.urls'
 
 TEMPLATES = [
@@ -75,8 +84,15 @@ WSGI_APPLICATION = 'ssms.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ssmsdb',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'OPTIONS': {
+                 'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+         }
     }
 }
 
@@ -116,8 +132,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    # "/var/www/static/",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = 'auth'
