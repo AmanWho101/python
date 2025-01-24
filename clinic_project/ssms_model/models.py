@@ -21,7 +21,7 @@ class Amount(models.Model):
     name = models.CharField(max_length = 200)
 
 class Card(models.Model):
-    number = models.IntegerField(blank=True, null=True)
+    number = models.CharField(blank=True, null=True,max_length = 200)
     location_id = models.IntegerField(blank=True, null=True)
 #need checking
 class Category(models.Model):
@@ -163,6 +163,16 @@ class Students(models.Model):
     ip_address = models.CharField(max_length = 200)
     manuplator_id = models.IntegerField(blank=True, null=True)
     archived = models.IntegerField(blank=True, null=True)
+
+
+class Employees(models.Model):
+    full_name = models.CharField(max_length=200)
+    phone = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    work_unit = models.CharField(max_length=200)
+    job_position = models.CharField(max_length=200)
+    id_number = models.CharField(max_length=200)
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
 
 
 class Pending_id_prints(models.Model):

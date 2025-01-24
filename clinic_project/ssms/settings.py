@@ -38,13 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ssms_model', # for model use
-    'clerk', # clerk / receptionist
-    'head_office', # head office
-    'laboratory', # laboratory
-    'opd', # opd
-    'pharmacy', # pharmacy
-    'store', # store
-    'auth_', # authentication
+    'clinic', # clerk / receptionist
+
     
 ]
 

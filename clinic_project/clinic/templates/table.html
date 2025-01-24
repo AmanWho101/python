@@ -1,0 +1,78 @@
+{% load static %}
+
+  <!-- /.col -->
+   
+{% if not associate %}
+    <!-- Widget: user widget style 1 -->
+    <div class="card card-widget widget-user">
+      <!-- Add the bg color to the header using any of the bg-* classes -->
+      <div class="widget-user-header bg-info">
+        <h3 class="widget-user-username">
+          Full Name:
+        </h3>
+        <h3 class="widget-user-username">
+          {{data.personal_name}} {{data.father_name}} {{data.grand_father_name}}
+        </h3>
+      </div>
+      <div class="widget-user-image">
+        <img class="img-circle elevation-2" src="{% static '/dist/img/avatar.png'%}" alt="User Avatar">
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-4 border-right">
+            <div class="description-block">
+              <h5 class="description-header">Id Number</h5>
+              <span class="description-text">{{data.id_number}}</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+         
+          <!-- /.col -->
+          <div class="col-sm-4">
+            <div class="description-block">
+              <h5 class="description-header">Year</h5>
+              <span class="description-text">{{cards.location_id}}</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4">
+            <div class="description-block">
+              <h5 class="description-header">Card Number</h5>
+              <span class="description-text">{{cards.number}}</span>
+            </div>
+            <!-- /.description-block -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <center>
+        <h3>
+          Assign To Doctor
+        </h3>
+      </center>
+      <div class="card-footer">
+       
+        <div class="col">
+          <td align="left" colspan="2">
+            {% for key in doctors %}
+            <p>
+              <button type="button" class="assign_me btn btn-success" data-doctor_id="4" 
+              data-id_number="UGR/19578/12">{{key}} &nbsp;&nbsp;&nbsp;
+              <span class="badge">{{ doctors.key }}</span>
+            </button>
+          </p>
+          {% endfor %}
+        
+        </td>
+        </div>
+      </div>
+    </div>
+
+  {% endif %}
+    <!-- /.widget-user -->
+
+  <!-- /.col -->
+
+  <!-- /.col -->

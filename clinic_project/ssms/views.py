@@ -4,6 +4,6 @@ def auth(request):
     if request.user.is_authenticated:
         if request.user.groups.filter(name='admin'):
             return redirect('/admin/')
-        elif request.user.groups.filter(name='receptions'):
+        elif request.user.groups.filter(name='reception'):
             return redirect('/reception/')
         
