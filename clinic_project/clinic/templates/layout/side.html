@@ -37,20 +37,31 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{% url 'clinic:register' %}" class="nav-link {% if request.path == '/reception/register' %} active {% endif %}">
-                  <i class="far fa-user nav-icon"></i>
-                  <p>Register</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'clinic:card' %}" class="nav-link {% if request.path == '/reception/card' %} active {% endif %}">
-                  <i class="far fa-address-card nav-icon"></i>
-                  <p>card</p>
-                </a>
-              </li>
+              {% for group in user.groups.all %}
+              {% if group.name  == 'reception' %}
+                <li class="nav-item">
+                  <a href="{% url 'clinic:register' %}" class="nav-link {% if request.path == '/clinic/reception/register' %} active {% endif %}">
+                    <i class="far fa-user nav-icon"></i>
+                    <p>Register</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'clinic:card' %}" class="nav-link {% if request.path == '/clinic/reception/card' %} active {% endif %}">
+                    <i class="far fa-address-card nav-icon"></i>
+                    <p>Card</p>
+                  </a>
+                </li>
+              {% elif group.name  == 'doctor' %}
+                <li class="nav-item">
+                  <a href="{% url 'clinic:room' %}"
+                   class="nav-link {% if request.path == '/clinic/doctor/room' %} active {% endif %}">
+                    <i class="far fa-user nav-icon"></i>
+                    <p>Examination</p>
+                  </a>
+                </li>
+              {% endif %}
               
-
+            {% endfor  %}
             </ul>
           </li>
           

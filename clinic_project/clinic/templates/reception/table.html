@@ -52,21 +52,29 @@
           Assign To Doctor
         </h3>
       </center>
-      <div class="card-footer">
-       
+      <div class="card-footer" id="doc_asigned">
+       {% if not allready_assigned %}
         <div class="col">
           <td align="left" colspan="2">
-            {% for key in doctors %}
+            {% for key, value in doctors.items %}
             <p>
-              <button type="button" class="assign_me btn btn-success" data-doctor_id="4" 
-              data-id_number="UGR/19578/12">{{key}} &nbsp;&nbsp;&nbsp;
-              <span class="badge">{{ doctors.key }}</span>
+              <button type="button" id="assign_doc" class="assign_doc btn btn-success" data-doctor_id="{{ value.1 }}" 
+              data-id_number="{{data.id_number}}">{{key}} &nbsp;&nbsp;&nbsp;
+              <span class="badge badge-light">{{ value.0 }}</span>
             </button>
           </p>
           {% endfor %}
         
         </td>
         </div>
+        {% else %}
+        <div class="col">
+          <h3>
+            {{msg}}
+          </h3>
+
+        </div>
+        {% endif %}
       </div>
     </div>
 

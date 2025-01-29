@@ -26,35 +26,37 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content card">
-      <div class="container-fluid card-body ">
+    <section class="content">
+      <div class="container-fluid">
        
 
-        <table class="table" id="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Id Number</th>
-              <th scope="col">Assigned to</th>
-              <th scope="col">Change to</th>
-              <th scope="col">Patient Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-            </tr>
-            
-          </tbody>
-        </table>
+
+      <!-- /.content-header -->
+    <section class="content">
+      <div class="container-fluid">
+          <h2 class="text-center display-4">Search</h2>
+          <div class="row">
+              <div class="col-md-8 offset-md-2">
+                      <div class="input-group">
+                          <input type="search" id="key_id_number" class="form-control form-control-lg" 
+                          placeholder="type id number here">
+                          <div class="input-group-append">
+                              <button type="submit" id="search_card" class="btn btn-lg btn-default">
+                                  <i class="fa fa-search"></i>
+                              </button>
+                          </div>
+                      </div>
+              </div>
+          </div>
+          <div class="p-3"></div>
+          <div id="edit_card" class="card">
+
+          </div>
+      </div>
+  </section>
       
 
 
@@ -63,6 +65,16 @@
     </section>
     <!-- /.content -->
   </div>
+     
+
+
+
+
+
+
+
+
+
     </div>
 </body>
 {% include "layout/footer.html" %}

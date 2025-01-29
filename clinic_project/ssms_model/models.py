@@ -2,6 +2,20 @@ from django.db import models
 
 # Create your models here.
 
+
+class Gender(models.Model):
+    name = models.CharField(max_length = 200)
+
+
+class Employees(models.Model):
+    full_name = models.CharField(max_length=200)
+    phone = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    work_unit = models.CharField(max_length=200)
+    job_position = models.CharField(max_length=200)
+    id_number = models.CharField(max_length=200)
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
+
 class Statuses(models.Model):
     name = models.CharField(max_length = 200)
     description = models.CharField(max_length = 200)
@@ -47,7 +61,7 @@ class Diseases(models.Model):
     description = models.CharField(max_length = 200)
 
 class Doctors(models.Model):
-    employee_id = models.IntegerField(blank=True, null=True)
+    employee = models.ForeignKey(Employees,on_delete=models.CASCADE)
 
 class Dosage_type(models.Model):
     name = models.CharField(max_length = 200)
@@ -107,9 +121,6 @@ class Examination_type_options(models.Model):
 class Frequency(models.Model):
     name = models.CharField(max_length = 200)
 
-class Gender(models.Model):
-    name = models.CharField(max_length = 200)
-
 class Lab_technicians(models.Model):
     employee_id = models.IntegerField(blank=True, null=True)
 
@@ -165,15 +176,6 @@ class Students(models.Model):
     archived = models.IntegerField(blank=True, null=True)
 
 
-class Employees(models.Model):
-    full_name = models.CharField(max_length=200)
-    phone = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
-    work_unit = models.CharField(max_length=200)
-    job_position = models.CharField(max_length=200)
-    id_number = models.CharField(max_length=200)
-    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
-
 
 class Pending_id_prints(models.Model):
     student = models.ForeignKey(Students, on_delete=models.CASCADE) # api student id
@@ -186,7 +188,7 @@ class Refer_types(models.Model):
     name = models.CharField(max_length = 200)
 
 class Registration(models.Model):
-    registration_date = models.DateTimeField(auto_now_add=True)
+    registration_date = models.DateField(auto_now_add=True)
     student = models.ForeignKey(Students, on_delete=models.CASCADE)
     reception = models.ForeignKey(Reception, on_delete=models.CASCADE)
     employee_id = models.IntegerField(blank=True, null=True) # api person id
@@ -211,7 +213,7 @@ class Years(models.Model):
 class Priscriptions(models.Model):
     student = models.ForeignKey(Students, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctors, on_delete=models.CASCADE)
-    examination_date = models.DateTimeField(auto_now_add=True)
+    examination_date = models.DateTimeField()
     registration = models.ForeignKey(Registration, on_delete=models.CASCADE)
     employee_id = models.IntegerField(blank=True, null=True)
 

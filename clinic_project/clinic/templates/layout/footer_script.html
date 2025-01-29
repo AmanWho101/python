@@ -46,8 +46,23 @@
 <script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<!-- Select2 -->
+<script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
+<!-- Toastr -->
+ <!-- SweetAlert2 -->
+<script src="{% static 'plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
   <script>
-
+ var Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    //Initialize Select2 Elements
+      $('.select2').select2({
+        theme: 'bootstrap4'
+      })
 
 let code = "";
 let reading = false;
@@ -93,6 +108,7 @@ document.addEventListener('keypress', e => {
 $('#table').DataTable( {
     
 } );
+$('#table1').DataTable({})
 
 $(document).on('click','#associate',function(e){
         var code = $(this).data('barcode')
@@ -108,5 +124,88 @@ $(document).on('click','#associate',function(e){
            }
           })
 })
+$(document).on('click','#assign_doc',function(e){
+    var doc_id = $(this).data('doctor_id')
+    var id_number = $(this).data('id_number')
+    $.ajax({
+            type: "POST",
+            url: "{% url 'clinic:assign_doctor' %}",
+            data: {
+              'csrfmiddlewaretoken':'{{ csrf_token }}',
+              'doc_id':doc_id,
+              'id_number':id_number,
+            },
+            success: function(msg){
+              $('#doc_asigned').html(msg)
+           }
+          })
+})
+$(document).on('change','#change_doc',function(){
+  var doc_id = $(this).val()
+  var stud_id = $(this).data('stud')
+  var change_doc_id = $(this).data('changedoc')
+  $.ajax({
+            type: "POST",
+            url: "{% url 'clinic:change_doctor' %}",
+            data: {
+              'csrfmiddlewaretoken':'{{ csrf_token }}',
+              'doc_id':doc_id,
+              'change_doc_id':change_doc_id,
+              'stud_id':stud_id,
+            },
+            success: function(msg){
+                toastr.success(msg.success)
+              
+              setTimeout(() => {
+              location.reload();
+              
+              },700)
+              
+           }
+        })
+})
 
+$(document).on('click','#search_card',function(){
+  var id_number = $('#key_id_number').val()
+  $.ajax({
+            type: "POST",
+            url: "{% url 'clinic:searchID' %}",
+            data: {
+              'csrfmiddlewaretoken':'{{ csrf_token }}',
+              'id_number':id_number,
+            },
+            success: function(msg){
+                // toastr.success(msg.success)
+              $('#edit_card').html(msg)
+              // setTimeout(() => {
+              // location.reload();
+              
+              // },700)
+              
+           }
+        })
+})
+
+$(document).on('click','#updatecard',function(){
+  var number = $('#number').val()
+  var location = $('#location').val()
+  var id = $('#id').val()
+      $.ajax({
+          type: "POST",
+            url: "{% url 'clinic:updatecard' %}",
+            data: {
+              'csrfmiddlewaretoken':'{{ csrf_token }}',
+              'number':number,
+              'location':location,
+              'id':id
+            },
+            success: function(msg){
+              toastr.success(msg.success)
+              setTimeout(() => {
+                document.location.reload();
+              },700)
+              
+          }
+  })
+})
 </script>

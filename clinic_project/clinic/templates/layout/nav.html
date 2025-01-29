@@ -4,31 +4,38 @@
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
+    <li class="nav-item">
+      {% if user.groups.all.0.name  == 'reception' %}
+        <a class="nav-link" href="{% url 'clinic:Reception_Home' %}" role="button">
+          Reception
+          <i class="fas fa-home"></i>
+        </a>
+      {% elif user.groups.all.0.name  == "doctor" %}
+        <a class="nav-link" href="{% url 'clinic:doctor_home' %}" role="button">
+          OPD
+          <i class="fas fa-home"></i>
+        </a>
+      {% endif %}
+    </a>
+    </li>
   </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-    
-
-    
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <div class="user-panel pb-3 mb-3 d-flex">
               <img src="{% static 'dist/img/avatar.png' %}" 
               class="img-circle elevation-2" alt="User Image">
-            
           </div>
         </a>
         
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          
           <span class="dropdown-item dropdown-header">Manage Account</span>
-          
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <i class="fas fa-eye mr-2"></i> View Profile
           </a>
-          
           <div class="dropdown-divider"></div>
           <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
