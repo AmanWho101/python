@@ -19,4 +19,10 @@ urlpatterns = [
     # doctor url
     path('doctor/home',dr_views.home,name='doctor_home'),
     path('doctor/room',dr_views.room,name='room'),
+    path('doctor/checked',dr_views.patient_checked,name="p_checked"),
+    path('doctor/getData',dr_views.getData,name="getData"),
+    path('doctor/getPData',dr_views.getPData,name='getPData'),
+    # getDrug
+    path('doctor/getDrug',dr_views.getDrug,name='getDrug'),
+
 ]

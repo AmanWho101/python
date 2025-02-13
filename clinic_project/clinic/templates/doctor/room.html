@@ -43,20 +43,38 @@
             <table id="table" class="table table-bordered table-striped table-hover">
               <thead>
               <tr>
-                <th>Full Name</th>
+                <th>#</th>
                 <th>Student</th>
                 <th>Id Number</th>
                 <th>Action</th>
               </tr>
               </thead>
               <tbody>
+            {% for patient in patients %}
               <tr>
-                <td>Full Name</td>
-                <td>Student</td>
-                <td>Id Number</td>
-                <td>Action</td>
+                <td>{{ forloop.counter }}</td>
+                <td>
+                  {{ patient.student.personal_name }}
+                  {{ patient.student.father_name }}
+                  {{ patient.student.grand_father_name }}
+                </td>
+                <td>{{ patient.student.id_number }}</td>
+                <td>
+                  <a class="btn btn-info" id="view_opd_p" data-id="{{patient.student.id}}" 
+                      data-backdrop='static' data-keyboard='false' data-toggle="modal" data-target="#opd_view" href="#">
+                    Priscribe
+                  </a>
+                  <a class="btn btn-info" id="view_opd_r" data-id="{{patient.student.id}}" 
+                      data-backdrop='static' data-keyboard='false' data-toggle="modal" data-target="#opd_view" href="#">
+                    Refer
+                  </a>
+                  <a class="btn btn-info" id="view_opd_l" data-id="{{patient.student.id}}" 
+                      data-backdrop='static' data-keyboard='false' data-toggle="modal" data-target="#opd_view" href="#">
+                    Laboratory
+                  </a>
+                </td>
               </tr>
-              
+            {% endfor %}
               </tbody>
               
             </table>
@@ -79,7 +97,27 @@
 
 
 
-
+  <div class="modal fade" id="opd_view">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Diagnose Patient</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'clinic:p_checked' %}" method="post">
+          {% csrf_token %}
+        <div  id="viewdata">
+          
+        </div>
+        
+      </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
 
 
 

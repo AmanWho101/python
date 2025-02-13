@@ -208,4 +208,46 @@ $(document).on('click','#updatecard',function(){
           }
   })
 })
+
+$(document).on('click','#view_opd_p',function(){
+
+  var id = $(this).data('id')
+  $.ajax({
+    type:'POST',
+    url:"{% url 'clinic:getData' %}",
+    data:{
+      'csrfmiddlewaretoken':'{{ csrf_token }}',
+      'id':id
+    },
+    success:function(data){
+      $('#viewdata').html(data)
+    }
+  })
+})
+$(document).on('change','#priscription',function(){
+  $.ajax({
+    type:'POST',
+    url:"{% url 'clinic:getPData' %}",
+    data:{
+      'csrfmiddlewaretoken':'{{ csrf_token }}',
+    },
+    success:function(data){
+      $('#priscription_t').html(data)
+    }
+  })
+})
+$(document).on('change','#category_id',function(){
+  var id = $(this).val()
+  $.ajax({
+    type:'POST',
+    url:"{% url 'clinic:getDrug' %}",
+    data:{
+      'csrfmiddlewaretoken':'{{ csrf_token }}',
+      'id':id
+    },
+    success:function(data){
+      $('#priscription_t').html(data)
+    }
+  })
+})
 </script>

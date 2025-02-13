@@ -1,0 +1,60 @@
+
+<div class="col">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+        <tr>
+        <th>No</th><th>Category</th><th>Drug</th><th>Quantity</th><th colspan="3">Dosage</th><th>Remark</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td><label id="num" class="control-label">{{categorys.key}}</label></td><td>
+            <select id="category_id" name="category_id" class="form-control input-sm">
+                
+                
+                {% for category in categorys %}
+                    {% if category.id == id %}
+                        <option selected value="{{category.id}}">{{category.name}}</option>
+                   {% else %}
+                   <option value="{{category.id}}">{{ category.name  }}</option>
+                    {% endif %}
+                    
+                
+                {% endfor %}
+            </select></td>
+            <td>
+            <select id="drug_id" name="drug_id" class="form-control input-sm">
+                <option value="0"> -- Select Drug --</option>
+            </select></td>
+            <td>
+                <input data-type="number" type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity">
+            </td>
+            <td>
+                <select id="amount_id" name="amount_id" class="form-control input-sm">
+                <option value="0">none</option>
+                {% for amount in amounts %}
+                <option value="{{amount.id}}">{{amount.name}}</option>
+                {% endfor %}
+            </select></td>
+                <td>
+                <select id="type_id" name="type_id" class="form-control input-sm">
+                    <option value="0">none</option>
+                    {% for dosage_type in dosage_types %}
+                    <option value="{{dosage_type.id}}">{{dosage_type.name}}</option>
+                    {% endfor %}
+                </select>
+                </td>
+                <td>
+                <select id="frequency_id" name="frequency_id" class="form-control input-sm">
+                    <option value="0">none</option>
+                    {% for frequency in frequencys %}
+                    <option value="{{frequency.id}}">{{frequency.name}}</option>
+                    {% endfor %}
+                </select>
+                </td>
+                <td><textarea data-type="textarea" cols="15" class="form-control" id="remark" name="remark" placeholder="Remark">
+                </textarea>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+  </div>

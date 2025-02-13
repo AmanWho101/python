@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 SESSION_COOKIE_AGE = 5*60
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 ROOT_URLCONF = 'ssms.urls'
 
 TEMPLATES = [

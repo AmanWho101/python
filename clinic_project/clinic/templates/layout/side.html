@@ -1,7 +1,18 @@
 {% load static %}
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link pl-2 ">
+    {% for group in user.groups.all %}
+              {% if group.name  == 'reception' %}
+    <a href="{% url 'clinic:Reception_Home' %}" class="brand-link pl-2 ">
+
+              {% elif group.name  == 'doctor' %}
+
+    <a href="{% url 'clinic:doctor_home' %}" class="brand-link pl-2 ">
+    
+              {% endif %}
+              
+            {% endfor  %}
+          
       <img src="{% static 'dist/img/astu.jpg' %}" alt="AdminLTE Logo" 
       class="brand-image img-circle elevation-3 " style="opacity: .8">
       <span class="brand-text font-weight-light">SSMS</span>
