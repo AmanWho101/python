@@ -9,11 +9,12 @@
         </div>
         </div>
     </div>
+<input type="hidden" name="priscription_id" value="{{patients.id}}">
     <div class="col-12">
         <div class="form-group row offset-1">
             <label for="druglist" class="col-sm-2 col-form-label">Disease Type</label>
             <div class="col ">
-              <select name="priscription" id="priscription" class="form-control col-sm-6" >
+              <select name="disease_id" id="disease_id" class="form-control col-sm-6" >
                   <option value=""> --- -- select Disease -- ---</option>
                   {% for disease in diseases %}
                   <option value="{{disease.id}}">{{disease.name}}</option>
@@ -29,8 +30,9 @@
 </div>
 
 
-<div class="modal-body">
+    <div class="modal-body">
         <div class="modal-footer justify-content-between">
-          <button type="submit" id="bchecked" class="btn btn-success">Save changes</button>
+          <button id="bchecked" class="btn btn-success">Save changes</button>
         </div>
     </div>
+

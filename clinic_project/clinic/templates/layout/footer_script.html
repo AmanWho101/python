@@ -224,7 +224,7 @@ $(document).on('click','#view_opd_p',function(){
     }
   })
 })
-$(document).on('change','#priscription',function(){
+$(document).on('change','#disease_id',function(){
   $.ajax({
     type:'POST',
     url:"{% url 'clinic:getPData' %}",

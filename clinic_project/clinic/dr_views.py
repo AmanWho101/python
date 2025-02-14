@@ -14,9 +14,9 @@ def home(request):
 def room(request):
     date = datetime.date.today()
     patients = Priscriptions.objects.filter(
-        examination_date__isnull=True,
         registration__registration_date=date
     )
+    
     context={
         'patients':patients
     }
@@ -24,6 +24,20 @@ def room(request):
 
 @login_required(redirect_field_name="login")
 def patient_checked(request):
+    date = datetime.date.today()
+    dosage = request.POST.get('amount_id')+' ' +request.POST.get('type_id')+' ' +request.POST.get('frequency_id')
+    drug_pri = Drug_prescriptions(
+        disease_id=request.POST.get('disease_id'),
+        drug_id=request.POST.get('drug_id'),
+        priscription_id=request.POST.get('priscription_id'),
+        quantity=request.POST.get('quantity'),
+        dosage=dosage,
+        remark=request.POST.get('remark'),
+    )
+    drug_pri.save()
+    examination = Priscriptions.objects.get(id=drug_pri.priscription_id)
+    examination.examination_date = date
+    examination.save(update_fields=['examination_date'])
     context = {
         'msg': "Change Saved Successfully!"
     }
@@ -34,7 +48,6 @@ def getData(request):
     
     date = datetime.date.today()
     patients = Priscriptions.objects.filter(
-        examination_date__isnull=True,
         registration__registration_date=date,
         student_id=request.POST.get('id')
 
@@ -63,12 +76,14 @@ def getDrug(request):
     dosage_type = Dosage_type.objects.all()
     amount = Amount.objects.all()
     id = request.POST.get('id')
+    categorys_name = Category.objects.get(pk=id)
+    drugs = Drugs.objects.filter(category_id=id)
     context = {
-        'id':request.POST.get('id'),
+        'categorys_name':categorys_name,
         'categorys':categorys,
         'frequencys':frequency,
         'dosage_types':dosage_type,
         'amounts':amount,
+        'drugs':drugs,
     }
-    print(context)
     return render(request,'doctor/priscription.html',context)

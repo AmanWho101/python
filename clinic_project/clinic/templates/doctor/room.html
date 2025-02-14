@@ -60,10 +60,18 @@
                 </td>
                 <td>{{ patient.student.id_number }}</td>
                 <td>
+                  {% if patient.examination_date != None %}
+                    <span>Treated</span>
+                    <a class="btn btn-info" id="view_opd_p" data-id="{{patient.student.id}}" 
+                      data-backdrop='static' data-keyboard='false' data-toggle="modal" data-target="#opd_view" href="#">
+                    Add Priscribe
+                  </a>
+                  {% else %}
                   <a class="btn btn-info" id="view_opd_p" data-id="{{patient.student.id}}" 
                       data-backdrop='static' data-keyboard='false' data-toggle="modal" data-target="#opd_view" href="#">
                     Priscribe
                   </a>
+                  {% endif %}
                   <a class="btn btn-info" id="view_opd_r" data-id="{{patient.student.id}}" 
                       data-backdrop='static' data-keyboard='false' data-toggle="modal" data-target="#opd_view" href="#">
                     Refer

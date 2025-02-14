@@ -7,13 +7,16 @@
         </thead>
         <tbody>
         <tr>
-        <td><label id="num" class="control-label">{{categorys.key}}</label></td><td>
-            <select id="category_id" name="category_id" class="form-control input-sm">
+        <td><label id="num" class="control-label">1</label></td><td>
+            <select id="category_id" required name="category_id" class="form-control input-sm">
                 
-                
+                {% if categorys_name.name == None %}
+                <option selected value="">--- Choose Category ---</option>
+                {% endif %}
                 {% for category in categorys %}
-                    {% if category.id == id %}
-                        <option selected value="{{category.id}}">{{category.name}}</option>
+                
+                    {% if category.name == categorys_name.name %}
+                        <option selected value="{{category.id}}">{{categorys_name.name}}</option>
                    {% else %}
                    <option value="{{category.id}}">{{ category.name  }}</option>
                     {% endif %}
@@ -22,30 +25,33 @@
                 {% endfor %}
             </select></td>
             <td>
-            <select id="drug_id" name="drug_id" class="form-control input-sm">
-                <option value="0"> -- Select Drug --</option>
+            <select id="drug_id" required name="drug_id" class="form-control input-sm">
+                <option value=""> -- Select Drug --</option>
+                {% for drug in drugs %}
+                <option value="{{drug.id}}"> {{drug.name}}</option>
+                {% endfor %}
             </select></td>
             <td>
-                <input data-type="number" type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity">
+                <input data-type="number" type="number" class="form-control" id="quantity" name="quantity" required placeholder="Quantity">
             </td>
             <td>
-                <select id="amount_id" name="amount_id" class="form-control input-sm">
-                <option value="0">none</option>
+                <select id="amount_id" name="amount_id" class="form-control input-sm" required>
+                <option value="">none</option>
                 {% for amount in amounts %}
                 <option value="{{amount.id}}">{{amount.name}}</option>
                 {% endfor %}
             </select></td>
                 <td>
-                <select id="type_id" name="type_id" class="form-control input-sm">
-                    <option value="0">none</option>
+                <select id="type_id" name="type_id" required class="form-control input-sm">
+                    <option value="">none</option>
                     {% for dosage_type in dosage_types %}
                     <option value="{{dosage_type.id}}">{{dosage_type.name}}</option>
                     {% endfor %}
                 </select>
                 </td>
                 <td>
-                <select id="frequency_id" name="frequency_id" class="form-control input-sm">
-                    <option value="0">none</option>
+                <select id="frequency_id" required name="frequency_id" class="form-control input-sm">
+                    <option value="">none</option>
                     {% for frequency in frequencys %}
                     <option value="{{frequency.id}}">{{frequency.name}}</option>
                     {% endfor %}

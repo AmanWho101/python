@@ -234,13 +234,13 @@ class Lab_examination(models.Model):
     remark = models.CharField(max_length = 200) 
 
 class Drug_prescriptions(models.Model):
-    disease  = models.ForeignKey(Diseases, on_delete=models.CASCADE)
-    drug  = models.ForeignKey(Drugs, on_delete=models.CASCADE)
-    priscription = models.ForeignKey(Priscriptions, on_delete=models.CASCADE)
+    disease  = models.ForeignKey(Diseases, on_delete=models.CASCADE, null=True)
+    drug  = models.ForeignKey(Drugs, on_delete=models.CASCADE, null=True)
+    priscription = models.ForeignKey(Priscriptions, on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField(blank=True, null=True)
-    dosage = models.CharField(max_length = 200)
-    student_signature = models.CharField(max_length = 200)
-    delivery_date = models.DateTimeField()
+    dosage = models.CharField(max_length = 200, null=True)
+    student_signature = models.CharField(max_length = 200, null=True)
+    delivery_date = models.DateTimeField(null=True)
     pharmasist = models.ForeignKey(Pharmacists, on_delete=models.CASCADE)
-    remark = models.CharField(max_length = 200)
+    remark = models.CharField(max_length = 200, null=True)
 
